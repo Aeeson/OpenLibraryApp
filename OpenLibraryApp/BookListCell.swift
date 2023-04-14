@@ -58,4 +58,4 @@ class BookListCell: UITableViewCell {
     
 }
 
-let indent: CGFloat = 10
+fileprivate let indent: CGFloat = 10
