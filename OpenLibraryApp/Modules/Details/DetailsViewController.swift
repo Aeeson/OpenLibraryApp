@@ -1,6 +1,14 @@
 import UIKit
 
-class DetailsViewController: UIViewController {
+protocol DetailsViewProtocol: AnyObject {
+    
+}
+
+class DetailsViewController: UIViewController, DetailsViewProtocol {
+    
+    // MARK: - Properties
+    
+    var presenter: DetailsPresenterProtocol!
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -15,6 +23,7 @@ class DetailsViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Fisrt, \n Second, \n Third \n"
         label.backgroundColor = .cyan
+        label.numberOfLines = 0
         return label
     }()
     
@@ -41,13 +50,19 @@ class DetailsViewController: UIViewController {
         return imageView
     }()
     
-    
+    // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setConstraints()
     }
+    
+    // MARK: - Public
+    
+    
+    
+    // MARK: - Private
     
     private func setupView() {
         view.backgroundColor = .white

@@ -1,6 +1,14 @@
 import UIKit
 
-class BooksListViewController: UIViewController {
+protocol BooksListViewProtocol: AnyObject {
+    func showBooks(_ books: [Book])
+}
+
+class BooksListViewController: UIViewController, BooksListViewProtocol {
+    
+    // MARK: - Properties
+    
+    var presenter: BooksListPresenterProtocol!
     
     private lazy var booksList: UITableView = {
         let tableView = UITableView()
@@ -11,6 +19,8 @@ class BooksListViewController: UIViewController {
         return tableView
     }()
     
+    // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,8 +29,18 @@ class BooksListViewController: UIViewController {
        
     }
     
+    // MARK: - Public
+    
+    func showBooks(_ books: [Book]) {
+        // Add logic
+    }
+    
+    
+    // MARK: - Private
+    
     private func setupView() {
         view.addSubview(booksList)
+        view.backgroundColor = .white
         booksList.delegate = self
         booksList.dataSource = self
     }
@@ -45,8 +65,9 @@ extension BooksListViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = DetailsViewController()
-        present(vc, animated: true)
+        // add logic
+        let book = Book()
+        presenter.openDetails(for: book)
     }
    
 }

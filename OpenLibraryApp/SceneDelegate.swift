@@ -7,8 +7,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        let booksListVC = BooksListViewController()
-        window?.rootViewController = booksListVC
+        let navigationController = UINavigationController()
+        let builder = AssemblyBuilder()
+        let coordinator = Coordinator(navigationController: navigationController, assemblyBuilder: builder)
+        coordinator.openBooksList()
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 }
