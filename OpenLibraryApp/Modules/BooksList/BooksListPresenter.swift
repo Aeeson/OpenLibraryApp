@@ -28,7 +28,7 @@ final class BooksListPresenter: BooksListPresenterProtocol {
     // MARK: - Public
     
     func getBooksList() {
-        networkService.getBooksList(subject: "war") { result in
+        networkService.getBooksList(subject: "history") { result in
             switch result {
             case .success(let books):
                 self.booksListView.showBooks(books)

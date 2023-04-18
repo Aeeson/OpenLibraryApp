@@ -14,7 +14,7 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
     private lazy var contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.CustomColors.primaryBackground
         view.layer.cornerRadius = 12
         return view
     }()
@@ -31,6 +31,7 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 3
         label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = UIColor.CustomColors.primaryLabel
         return label
     }()
     
@@ -39,6 +40,7 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 15)
+        label.textColor = UIColor.CustomColors.primaryLabel
         return label
     }()
     
@@ -46,7 +48,7 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = .darkGray
+        label.textColor = UIColor.CustomColors.secondaryLabel
         return label
     }()
     
@@ -55,6 +57,7 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.CustomColors.primaryLabel
         return label
     }()
     
@@ -102,7 +105,7 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
     // MARK: - Private
     
     private func setupView() {
-        view.backgroundColor = .systemGroupedBackground
+        view.backgroundColor = UIColor.CustomColors.secondaryBackground
         view.addSubview(scroolView)
         self.navigationItem.title = "Details"
         

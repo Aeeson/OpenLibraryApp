@@ -14,6 +14,7 @@ final class BookListCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = UIColor.CustomColors.primaryLabel
         return label
     }()
     
@@ -21,6 +22,7 @@ final class BookListCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.CustomColors.primaryLabel
         return label
     }()
     
@@ -28,6 +30,7 @@ final class BookListCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = UIColor.CustomColors.primaryLabel
         return label
     }()
     

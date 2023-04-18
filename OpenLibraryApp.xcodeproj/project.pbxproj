@@ -21,6 +21,7 @@
 		63D3C96329E9704500A4B008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63D3C96229E9704500A4B008 /* Assets.xcassets */; };
 		63D3C96629E9704500A4B008 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63D3C96429E9704500A4B008 /* LaunchScreen.storyboard */; };
 		63D3C97129E9704500A4B008 /* OpenLibraryAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D3C97029E9704500A4B008 /* OpenLibraryAppTests.swift */; };
+		63F0538229EF079500ED3849 /* UIColot+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F0538129EF079500ED3849 /* UIColot+ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		63D3C96C29E9704500A4B008 /* OpenLibraryAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenLibraryAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63D3C97029E9704500A4B008 /* OpenLibraryAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLibraryAppTests.swift; sourceTree = "<group>"; };
 		63D3C97629E9704600A4B008 /* OpenLibraryAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenLibraryAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		63F0538129EF079500ED3849 /* UIColot+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColot+ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 				63D3C95B29E9704400A4B008 /* SceneDelegate.swift */,
 				6335B5F929E9D79E0023FD78 /* Modules */,
 				6335B5F829E9D7800023FD78 /* Navigation */,
+				63F0538029EF077100ED3849 /* Extensions */,
 				63D3C96229E9704500A4B008 /* Assets.xcassets */,
 				63D3C96429E9704500A4B008 /* LaunchScreen.storyboard */,
 				63D3C96729E9704500A4B008 /* Info.plist */,
@@ -164,6 +167,14 @@
 				63D3C97029E9704500A4B008 /* OpenLibraryAppTests.swift */,
 			);
 			path = OpenLibraryAppTests;
+			sourceTree = "<group>";
+		};
+		63F0538029EF077100ED3849 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				63F0538129EF079500ED3849 /* UIColot+ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,6 +318,7 @@
 				6335B5EF29E9C9AA0023FD78 /* BookModel.swift in Sources */,
 				6335B5F129E9CFAE0023FD78 /* AssemblyBuilder.swift in Sources */,
 				6335B5F529E9D11B0023FD78 /* DetailsPresenter.swift in Sources */,
+				63F0538229EF079500ED3849 /* UIColot+ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

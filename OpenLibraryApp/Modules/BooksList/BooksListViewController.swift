@@ -29,6 +29,8 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
         tableView.layer.cornerRadius = 12
         tableView.tableHeaderView = UIView()
         tableView.isHidden = true
+        tableView.backgroundColor = .clear
+        tableView.separatorColor = UIColor.CustomColors.separator
         return tableView
     }()
     
@@ -75,7 +77,7 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
     private func setupView() {
         view.addSubview(booksListTableView)
         view.addSubview(activityIndicatorView)
-        view.backgroundColor = .systemGroupedBackground
+        view.backgroundColor = UIColor.CustomColors.secondaryBackground
         self.navigationItem.title = "Books list"
         booksListTableView.delegate = self
         booksListTableView.dataSource = self
@@ -95,9 +97,9 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
         navigationController?.navigationBar.prefersLargeTitles = true
         
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .systemGroupedBackground
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+        appearance.backgroundColor = UIColor.CustomColors.secondaryBackground
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.CustomColors.primaryLabel ?? UIColor.black]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.CustomColors.primaryLabel ?? UIColor.black]
         appearance.configureWithTransparentBackground()
         
         navigationController?.navigationBar.standardAppearance = appearance
@@ -130,6 +132,7 @@ extension BooksListViewController: UITableViewDelegate,UITableViewDataSource {
         cell.coverImageView.image = booksCover[indexPath.row]
         cell.authorLabel.text = books[indexPath.row].authors.first?.name
         cell.selectionStyle = .none
+        cell.backgroundColor = UIColor.CustomColors.primaryBackground
         if booksCover[indexPath.row] == nil {
             cell.activityIndicator.startAnimating()
             presenter.getCover(id: String(books[indexPath.row].coverID), size: "S", cellID: indexPath)
