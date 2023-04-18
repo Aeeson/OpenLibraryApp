@@ -14,6 +14,13 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
     private var books = [Book]()
     private var booksCover = [UIImage?]()
     
+    private lazy var activityIndicatorView: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
+    
     private lazy var booksListTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(BookListCell.self, forCellReuseIdentifier: BookListCell.identifier)
@@ -21,6 +28,7 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
         tableView.rowHeight = 100
         tableView.layer.cornerRadius = 12
         tableView.tableHeaderView = UIView()
+        tableView.isHidden = true
         return tableView
     }()
     
@@ -33,8 +41,7 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
         setConstraints()
         
         presenter.getBooksList()
-        
-        // TODO: - ADD INDICATOR
+        activityIndicatorView.startAnimating()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +56,12 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
         self.books = books
         self.booksCover = Array(repeating: nil, count: self.books.count)
         booksListTableView.reloadData()
+        if !books.isEmpty {
+            activityIndicatorView.stopAnimating()
+            UIView.transition(with: booksListTableView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                    self.booksListTableView.isHidden = false
+                })
+        }
     }
     
     func showCover(data: Data, cellID: IndexPath) {
@@ -61,6 +74,7 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
     
     private func setupView() {
         view.addSubview(booksListTableView)
+        view.addSubview(activityIndicatorView)
         view.backgroundColor = .systemGroupedBackground
         self.navigationItem.title = "Books list"
         booksListTableView.delegate = self
@@ -72,6 +86,9 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
         booksListTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: indent).isActive = true
         booksListTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -indent).isActive = true
         booksListTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -indent).isActive = true
+        
+        activityIndicatorView.centerXAnchor.constraint(equalTo: booksListTableView.centerXAnchor).isActive = true
+        activityIndicatorView.centerYAnchor.constraint(equalTo: booksListTableView.centerYAnchor).isActive = true
     }
     
     private func setNavigationBar() {
@@ -112,13 +129,12 @@ extension BooksListViewController: UITableViewDelegate,UITableViewDataSource {
         cell.publishDateLabel.text = "Publish Date: \(String(books[indexPath.row].firstPublishYear))"
         cell.coverImageView.image = booksCover[indexPath.row]
         cell.authorLabel.text = books[indexPath.row].authors.first?.name
+        cell.selectionStyle = .none
         if booksCover[indexPath.row] == nil {
-            cell.activityIndicator.isHidden = false
             cell.activityIndicator.startAnimating()
             presenter.getCover(id: String(books[indexPath.row].coverID), size: "S", cellID: indexPath)
         } else {
             cell.activityIndicator.stopAnimating()
-            cell.activityIndicator.isHidden = true
         }
         return cell
     }

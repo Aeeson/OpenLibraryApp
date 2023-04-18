@@ -34,6 +34,7 @@ final class BookListCell: UITableViewCell {
     let activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.hidesWhenStopped = true
         return activityIndicator
     }()
     
@@ -73,9 +74,8 @@ final class BookListCell: UITableViewCell {
         coverImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -indent).isActive = true
         coverImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2).isActive = true
         
-        activityIndicator.topAnchor.constraint(equalTo: contentView.topAnchor, constant: indent).isActive = true
-        activityIndicator.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -indent).isActive = true
-        activityIndicator.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2).isActive = true
+        activityIndicator.centerXAnchor.constraint(equalTo: coverImageView.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: coverImageView.centerYAnchor).isActive = true
     }
     
 }

@@ -19,6 +19,13 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
         return view
     }()
     
+    private lazy var activityIndicatorView: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -55,6 +62,7 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
+        imageView.isHidden = true
         return imageView
     }()
     
@@ -86,7 +94,9 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
     }
     
     func showCover(data: Data) {
+        activityIndicatorView.stopAnimating()
         coverImageView.image = UIImage(data: data)
+        coverImageView.isHidden = false
     }
     
     // MARK: - Private
@@ -103,6 +113,8 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
         contentView.addSubview(publishDateLabel)
         contentView.addSubview(authorLabel)
         contentView.addSubview(coverImageView)
+        contentView.addSubview(activityIndicatorView)
+        activityIndicatorView.startAnimating()
     }
     
     private func setConstraints() {
@@ -133,6 +145,9 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
         coverImageView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -indent).isActive = true
         coverImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         coverImageView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        
+        activityIndicatorView.centerXAnchor.constraint(equalTo: coverImageView.centerXAnchor).isActive = true
+        activityIndicatorView.centerYAnchor.constraint(equalTo: coverImageView.centerYAnchor).isActive = true
         
         descriptionLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: indent).isActive = true
         descriptionLabel.topAnchor.constraint(equalTo: coverImageView.bottomAnchor, constant: indent).isActive = true
