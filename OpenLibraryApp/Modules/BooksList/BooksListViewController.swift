@@ -14,11 +14,13 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
     private var books = [Book]()
     private var booksCover = [UIImage?]()
     
-    private lazy var booksList: UITableView = {
+    private lazy var booksListTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(BookListCell.self, forCellReuseIdentifier: BookListCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = 100
+        tableView.layer.cornerRadius = 12
+        tableView.tableHeaderView = UIView()
         return tableView
     }()
     
@@ -32,8 +34,13 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
         
         presenter.getBooksList()
         
-        // add loading
-       
+        // TODO: - ADD INDICATOR
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setNavigationBar()
     }
     
     // MARK: - Public
@@ -41,29 +48,53 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
     func showBooks(_ books: [Book]) {
         self.books = books
         self.booksCover = Array(repeating: nil, count: self.books.count)
-        booksList.reloadData()
+        booksListTableView.reloadData()
     }
     
     func showCover(data: Data, cellID: IndexPath) {
         booksCover[cellID.row] = UIImage(data: data)
-        booksList.reloadData()
+        booksListTableView.reloadData()
     }
     
     
     // MARK: - Private
     
     private func setupView() {
-        view.addSubview(booksList)
-        view.backgroundColor = .white
-        booksList.delegate = self
-        booksList.dataSource = self
+        view.addSubview(booksListTableView)
+        view.backgroundColor = .systemGroupedBackground
+        self.navigationItem.title = "Books list"
+        booksListTableView.delegate = self
+        booksListTableView.dataSource = self
     }
     
     private func setConstraints() {
-        booksList.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
-        booksList.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        booksList.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
-        booksList.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        booksListTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: indent).isActive = true
+        booksListTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: indent).isActive = true
+        booksListTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -indent).isActive = true
+        booksListTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -indent).isActive = true
+    }
+    
+    private func setNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .systemGroupedBackground
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+        appearance.configureWithTransparentBackground()
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
+    private func showTableView() {
+        view.addSubview(booksListTableView)
+        
+        booksListTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: indent).isActive = true
+        booksListTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: indent).isActive = true
+        booksListTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -indent).isActive = true
+        booksListTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -indent).isActive = true
     }
     
 }
@@ -78,8 +109,9 @@ extension BooksListViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: BookListCell.identifier, for: indexPath) as! BookListCell
         cell.titleLabel.text = books[indexPath.row].title
-        cell.publishDateLabel.text = String(books[indexPath.row].firstPublishYear)
+        cell.publishDateLabel.text = "Publish Date: \(String(books[indexPath.row].firstPublishYear))"
         cell.coverImageView.image = booksCover[indexPath.row]
+        cell.authorLabel.text = books[indexPath.row].authors.first?.name
         if booksCover[indexPath.row] == nil {
             cell.activityIndicator.isHidden = false
             cell.activityIndicator.startAnimating()
@@ -98,3 +130,4 @@ extension BooksListViewController: UITableViewDelegate,UITableViewDataSource {
    
 }
 
+fileprivate let indent: CGFloat = 16

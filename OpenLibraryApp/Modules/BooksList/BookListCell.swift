@@ -13,16 +13,21 @@ final class BookListCell: UITableViewCell {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .green
-        label.text = "Name"
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        return label
+    }()
+    
+    let authorLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
     
     let publishDateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .green
-        label.text = "Publish Date"
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
@@ -47,12 +52,17 @@ final class BookListCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(publishDateLabel)
         contentView.addSubview(activityIndicator)
+        contentView.addSubview(authorLabel)
     }
     
     private func setConstraints() {
         titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: indent).isActive = true
         titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: indent).isActive = true
         titleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.7).isActive = true
+        
+        authorLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: indent).isActive = true
+        authorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: indent).isActive = true
+        authorLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.7).isActive = true
         
         publishDateLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: indent).isActive = true
         publishDateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -indent).isActive = true

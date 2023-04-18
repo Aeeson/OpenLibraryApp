@@ -35,7 +35,7 @@ final class DetailsPresenter: DetailsPresenterProtocol {
     }
     
     func loadCover() {
-        networkService.getCover(id: String(book.coverID), size: "L") { result in
+        networkService.getCover(id: String(book.coverID), size: "M") { result in
             switch result {
             case .success(let data):
                 self.detailsView.showCover(data: data)

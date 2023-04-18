@@ -15,7 +15,7 @@ final class NetworkService: NetworkServiceProtocol {
     func getBooksList(subject: String, completion: @escaping (Result<[Book], Error>) -> Void) {
         queue.async {
             guard let url = URL(string: self.baseListURL + subject + ".json") else { return }
-            var request = URLRequest(url: url)
+            let request = URLRequest(url: url)
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
                     DispatchQueue.main.async {
@@ -48,7 +48,7 @@ final class NetworkService: NetworkServiceProtocol {
     func getCover(id: String, size: String, completion: @escaping (Result<Data, Error>) -> Void) {
         queue.async {
             guard let url = URL(string: self.baseCoverURL + id + "-" + size + ".jpg") else { return }
-            var request = URLRequest(url: url)
+            let request = URLRequest(url: url)
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
                     DispatchQueue.main.async {
@@ -70,7 +70,7 @@ final class NetworkService: NetworkServiceProtocol {
     func getBookInfo(for key: String, completion: @escaping (Result<Details, Error>) -> Void) {
         queue.async {
             guard let url = URL(string: self.baseDetailsURL + key + ".json") else { return }
-            var request = URLRequest(url: url)
+            let request = URLRequest(url: url)
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
                     DispatchQueue.main.async {
