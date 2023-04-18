@@ -1,10 +1,11 @@
 import UIKit
 
 protocol DetailsViewProtocol: AnyObject {
-    
+    func showDetails(for book: Book, with details: Details)
+    func showCover(data: Data)
 }
 
-class DetailsViewController: UIViewController, DetailsViewProtocol {
+final class DetailsViewController: UIViewController, DetailsViewProtocol {
     
     // MARK: - Properties
     
@@ -13,7 +14,7 @@ class DetailsViewController: UIViewController, DetailsViewProtocol {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Name"
+//        label.text = "Name"
         label.backgroundColor = .cyan
         return label
     }()
@@ -21,7 +22,7 @@ class DetailsViewController: UIViewController, DetailsViewProtocol {
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Fisrt, \n Second, \n Third \n"
+//        label.text = "Fisrt, \n Second, \n Third \n"
         label.backgroundColor = .cyan
         label.numberOfLines = 0
         return label
@@ -30,7 +31,7 @@ class DetailsViewController: UIViewController, DetailsViewProtocol {
     private lazy var publishDateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Publish Date"
+//        label.text = "Publish Date"
         label.backgroundColor = .cyan
         return label
     }()
@@ -46,7 +47,7 @@ class DetailsViewController: UIViewController, DetailsViewProtocol {
     private lazy var coverImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = .yellow
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -54,13 +55,25 @@ class DetailsViewController: UIViewController, DetailsViewProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupView()
         setConstraints()
+        
+        presenter.getInfo()
+        presenter.loadCover()
     }
     
     // MARK: - Public
     
+    func showDetails(for book: Book, with details: Details) {
+        titleLabel.text = book.title
+        descriptionLabel.text = details.description
+        publishDateLabel.text = "Published at \(book.firstPublishYear)"
+    }
     
+    func showCover(data: Data) {
+        coverImageView.image = UIImage(data: data)
+    }
     
     // MARK: - Private
     

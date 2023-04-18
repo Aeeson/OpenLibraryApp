@@ -5,7 +5,7 @@ protocol CoordinatorProtocol {
     func openDetails(for book: Book)
 }
 
-class Coordinator: CoordinatorProtocol {
+final class Coordinator: CoordinatorProtocol {
     
     private let navigationController: UINavigationController
     private let assemblyBuilder: AssemblyBuilder
