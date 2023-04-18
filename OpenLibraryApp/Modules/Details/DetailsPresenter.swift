@@ -29,7 +29,7 @@ final class DetailsPresenter: DetailsPresenterProtocol {
             case .success(let details):
                 self.detailsView.showDetails(for: self.book, with: details)
             case .failure(let error):
-                print(error)
+                self.detailsView.showAlert(message: error.localizedDescription)
             }
         }
     }
@@ -40,7 +40,7 @@ final class DetailsPresenter: DetailsPresenterProtocol {
             case .success(let data):
                 self.detailsView.showCover(data: data)
             case .failure(let error):
-                print(error)
+                self.detailsView.showAlert(message: error.localizedDescription)
             }
         }
     }

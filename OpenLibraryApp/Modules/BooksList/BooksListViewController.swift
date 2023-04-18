@@ -3,6 +3,7 @@ import UIKit
 protocol BooksListViewProtocol: AnyObject {
     func showBooks(_ books: [Book])
     func showCover(data: Data, cellID: IndexPath)
+    func showAlert(message: String)
 }
 
 final class BooksListViewController: UIViewController, BooksListViewProtocol {
@@ -69,6 +70,12 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
     func showCover(data: Data, cellID: IndexPath) {
         booksCover[cellID.row] = UIImage(data: data)
         booksListTableView.reloadData()
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     

@@ -3,6 +3,7 @@ import UIKit
 protocol DetailsViewProtocol: AnyObject {
     func showDetails(for book: Book, with details: Details)
     func showCover(data: Data)
+    func showAlert(message: String)
 }
 
 final class DetailsViewController: UIViewController, DetailsViewProtocol {
@@ -100,6 +101,12 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
         activityIndicatorView.stopAnimating()
         coverImageView.image = UIImage(data: data)
         coverImageView.isHidden = false
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: - Private

@@ -33,7 +33,7 @@ final class BooksListPresenter: BooksListPresenterProtocol {
             case .success(let books):
                 self.booksListView.showBooks(books)
             case .failure(let error):
-                print(error)
+                self.booksListView.showAlert(message: error.localizedDescription)
             }
         }
         booksListView.showBooks([])
@@ -45,7 +45,7 @@ final class BooksListPresenter: BooksListPresenterProtocol {
             case .success(let data):
                 self.booksListView.showCover(data: data, cellID: cellID)
             case .failure(let error):
-                print(error)
+                self.booksListView.showAlert(message: error.localizedDescription)
             }
         }
     }
