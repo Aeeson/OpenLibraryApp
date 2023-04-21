@@ -61,7 +61,11 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
         booksListTableView.reloadData()
         if !books.isEmpty {
             activityIndicatorView.stopAnimating()
-            UIView.transition(with: booksListTableView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            UIView.transition(
+                with: booksListTableView,
+                duration: 0.5,
+                options: .transitionCrossDissolve,
+                animations: {
                     self.booksListTableView.isHidden = false
                 })
         }
@@ -73,8 +77,15 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
     }
     
     func showAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        let alert = UIAlertController(
+            title: "Error",
+            message: message,
+            preferredStyle: UIAlertController.Style.alert
+        )
+        alert.addAction(UIAlertAction(
+            title: "Ok",
+            style: UIAlertAction.Style.default, handler: nil
+        ))
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -91,13 +102,29 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
     }
     
     private func setConstraints() {
-        booksListTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: indent).isActive = true
-        booksListTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: indent).isActive = true
-        booksListTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -indent).isActive = true
-        booksListTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -indent).isActive = true
+        booksListTableView.leftAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.leftAnchor,
+            constant: indent
+        ).isActive = true
+        booksListTableView.topAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.topAnchor,
+            constant: indent
+        ).isActive = true
+        booksListTableView.rightAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.rightAnchor,
+            constant: -indent
+        ).isActive = true
+        booksListTableView.bottomAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+            constant: -indent
+        ).isActive = true
         
-        activityIndicatorView.centerXAnchor.constraint(equalTo: booksListTableView.centerXAnchor).isActive = true
-        activityIndicatorView.centerYAnchor.constraint(equalTo: booksListTableView.centerYAnchor).isActive = true
+        activityIndicatorView.centerXAnchor.constraint(
+            equalTo: booksListTableView.centerXAnchor
+        ).isActive = true
+        activityIndicatorView.centerYAnchor.constraint(
+            equalTo: booksListTableView.centerYAnchor
+        ).isActive = true
     }
     
     private func setNavigationBar() {
@@ -105,8 +132,12 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
         
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = UIColor.CustomColors.secondaryBackground
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.CustomColors.primaryLabel ?? UIColor.black]
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.CustomColors.primaryLabel ?? UIColor.black]
+        appearance.titleTextAttributes = [
+            .foregroundColor: UIColor.CustomColors.primaryLabel ?? UIColor.black
+        ]
+        appearance.largeTitleTextAttributes = [
+            .foregroundColor: UIColor.CustomColors.primaryLabel ?? UIColor.black
+        ]
         appearance.configureWithTransparentBackground()
         
         navigationController?.navigationBar.standardAppearance = appearance
@@ -117,15 +148,26 @@ final class BooksListViewController: UIViewController, BooksListViewProtocol {
     private func showTableView() {
         view.addSubview(booksListTableView)
         
-        booksListTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: indent).isActive = true
-        booksListTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: indent).isActive = true
-        booksListTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -indent).isActive = true
-        booksListTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -indent).isActive = true
+        booksListTableView.leftAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.leftAnchor,
+            constant: indent
+        ).isActive = true
+        booksListTableView.topAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.topAnchor,
+            constant: indent
+        ).isActive = true
+        booksListTableView.rightAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.rightAnchor,
+            constant: -indent
+        ).isActive = true
+        booksListTableView.bottomAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+            constant: -indent
+        ).isActive = true
     }
-    
 }
 
-    // MARK: - <UITableViewDelegate,UITableViewDataSource>
+// MARK: - <UITableViewDelegate,UITableViewDataSource>
 
 extension BooksListViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -133,16 +175,21 @@ extension BooksListViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: BookListCell.identifier, for: indexPath) as! BookListCell
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: BookListCell.identifier, for: indexPath
+        ) as! BookListCell
         cell.titleLabel.text = books[indexPath.row].title
-        cell.publishDateLabel.text = "Publish Date: \(String(books[indexPath.row].firstPublishYear))"
+        cell.publishDateLabel.text = "Published: \(String(books[indexPath.row].firstPublishYear))"
         cell.coverImageView.image = booksCover[indexPath.row]
         cell.authorLabel.text = books[indexPath.row].authors.first?.name
         cell.selectionStyle = .none
         cell.backgroundColor = UIColor.CustomColors.primaryBackground
         if booksCover[indexPath.row] == nil {
             cell.activityIndicator.startAnimating()
-            presenter.getCover(id: String(books[indexPath.row].coverID), size: "S", cellID: indexPath)
+            presenter.getCover(
+                id: String(books[indexPath.row].coverID),
+                size: "S", cellID: indexPath
+            )
         } else {
             cell.activityIndicator.stopAnimating()
         }
@@ -153,7 +200,6 @@ extension BooksListViewController: UITableViewDelegate,UITableViewDataSource {
         let book = books[indexPath.row]
         presenter.openDetails(for: book)
     }
-   
 }
 
 fileprivate let indent: CGFloat = 16

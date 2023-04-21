@@ -23,9 +23,6 @@ final class Coordinator: CoordinatorProtocol {
     func openDetails(for book: Book) {
         let vc = assemblyBuilder.createDetailsModule(for: book, coordinator: self)
         navigationController.pushViewController(vc, animated: true)
-    
     }
-    
-    
 }
 

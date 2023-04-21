@@ -47,7 +47,9 @@ final class NetworkService: NetworkServiceProtocol {
     
     func getCover(id: String, size: String, completion: @escaping (Result<Data, Error>) -> Void) {
         queue.async {
-            guard let url = URL(string: self.baseCoverURL + id + "-" + size + ".jpg") else { return }
+            guard let url = URL(string: self.baseCoverURL + id + "-" + size + ".jpg") else {
+                return
+            }
             let request = URLRequest(url: url)
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {

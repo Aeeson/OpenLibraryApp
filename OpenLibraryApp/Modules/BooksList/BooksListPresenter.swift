@@ -19,7 +19,12 @@ final class BooksListPresenter: BooksListPresenterProtocol {
     
     // MARK: - LifeCycle
     
-    required init(booksListView: BooksListViewProtocol, coordinator: CoordinatorProtocol, networkService: NetworkServiceProtocol) {
+    required init(
+        booksListView: BooksListViewProtocol,
+        coordinator: CoordinatorProtocol,
+        networkService: NetworkServiceProtocol
+    )
+    {
         self.booksListView = booksListView
         self.coordinator = coordinator
         self.networkService = networkService

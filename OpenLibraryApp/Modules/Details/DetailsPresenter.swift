@@ -14,7 +14,12 @@ final class DetailsPresenter: DetailsPresenterProtocol {
     
     // MARK: - LifeCycle
     
-    required init(book: Book, detailsView: DetailsViewProtocol, coordinator: CoordinatorProtocol, networkService: NetworkServiceProtocol) {
+    required init(
+        book: Book,
+        detailsView: DetailsViewProtocol,
+        coordinator: CoordinatorProtocol,
+        networkService: NetworkServiceProtocol
+    ) {
         self.book = book
         self.detailsView = detailsView
         self.coordinator = coordinator
@@ -44,5 +49,4 @@ final class DetailsPresenter: DetailsPresenterProtocol {
             }
         }
     }
-    
 }

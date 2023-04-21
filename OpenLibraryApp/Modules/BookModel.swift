@@ -31,7 +31,7 @@ struct Author: Codable {
 struct Details: Codable {
     let title, key: String
     let description: String
-
+    
     enum CodingKeys: String, CodingKey {
         case title, key, description
     }

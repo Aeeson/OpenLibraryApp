@@ -104,8 +104,16 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
     }
     
     func showAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        let alert = UIAlertController(
+            title: "Error",
+            message: message,
+            preferredStyle: UIAlertController.Style.alert
+        )
+        alert.addAction(UIAlertAction(
+            title: "Ok",
+            style: UIAlertAction.Style.default,
+            handler: nil
+        ))
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -131,38 +139,102 @@ final class DetailsViewController: UIViewController, DetailsViewProtocol {
         scroolView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         scroolView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         scroolView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        scroolView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        scroolView.bottomAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.bottomAnchor
+        ).isActive = true
         
-        contentView.leftAnchor.constraint(equalTo: scroolView.leftAnchor, constant: indent).isActive = true
-        contentView.topAnchor.constraint(equalTo: scroolView.topAnchor, constant: indent).isActive = true
-        contentView.rightAnchor.constraint(equalTo: scroolView.rightAnchor, constant: -indent).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: scroolView.bottomAnchor, constant: -indent).isActive = true
-        contentView.widthAnchor.constraint(equalToConstant: view.frame.width - 2 * indent).isActive = true
+        contentView.leftAnchor.constraint(
+            equalTo: scroolView.leftAnchor,
+            constant: indent
+        ).isActive = true
+        contentView.topAnchor.constraint(
+            equalTo: scroolView.topAnchor,
+            constant: indent
+        ).isActive = true
+        contentView.rightAnchor.constraint(
+            equalTo: scroolView.rightAnchor,
+            constant: -indent
+        ).isActive = true
+        contentView.bottomAnchor.constraint(
+            equalTo: scroolView.bottomAnchor,
+            constant: -indent
+        ).isActive = true
+        contentView.widthAnchor.constraint(
+            equalToConstant: view.frame.width - 2 * indent
+        ).isActive = true
         
-        titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: indent).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: indent).isActive = true
-        titleLabel.rightAnchor.constraint(equalTo: coverImageView.leftAnchor, constant: -indent).isActive = true
+        titleLabel.leftAnchor.constraint(
+            equalTo: contentView.leftAnchor,
+            constant: indent
+        ).isActive = true
+        titleLabel.topAnchor.constraint(
+            equalTo: contentView.topAnchor,
+            constant: indent
+        ).isActive = true
+        titleLabel.rightAnchor.constraint(
+            equalTo: coverImageView.leftAnchor,
+            constant: -indent
+        ).isActive = true
         
-        authorLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: indent).isActive = true
-        authorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: indent).isActive = true
-        authorLabel.rightAnchor.constraint(equalTo: coverImageView.leftAnchor, constant: -indent).isActive = true
+        authorLabel.leftAnchor.constraint(
+            equalTo: contentView.leftAnchor,
+            constant: indent
+        ).isActive = true
+        authorLabel.topAnchor.constraint(
+            equalTo: titleLabel.bottomAnchor,
+            constant: indent
+        ).isActive = true
+        authorLabel.rightAnchor.constraint(
+            equalTo: coverImageView.leftAnchor,
+            constant: -indent
+        ).isActive = true
         
-        publishDateLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: indent).isActive = true
-        publishDateLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: indent).isActive = true
-        publishDateLabel.rightAnchor.constraint(equalTo: coverImageView.leftAnchor, constant: -indent).isActive = true
+        publishDateLabel.leftAnchor.constraint(
+            equalTo: contentView.leftAnchor,
+            constant: indent
+        ).isActive = true
+        publishDateLabel.topAnchor.constraint(
+            equalTo: authorLabel.bottomAnchor,
+            constant: indent
+        ).isActive = true
+        publishDateLabel.rightAnchor.constraint(
+            equalTo: coverImageView.leftAnchor,
+            constant: -indent
+        ).isActive = true
         
-        coverImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: indent).isActive = true
-        coverImageView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -indent).isActive = true
+        coverImageView.topAnchor.constraint(
+            equalTo: contentView.topAnchor,
+            constant: indent
+        ).isActive = true
+        coverImageView.rightAnchor.constraint(
+            equalTo: contentView.rightAnchor,
+            constant: -indent
+        ).isActive = true
         coverImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         coverImageView.widthAnchor.constraint(equalToConstant: 120).isActive = true
         
-        activityIndicatorView.centerXAnchor.constraint(equalTo: coverImageView.centerXAnchor).isActive = true
-        activityIndicatorView.centerYAnchor.constraint(equalTo: coverImageView.centerYAnchor).isActive = true
+        activityIndicatorView.centerXAnchor.constraint(
+            equalTo: coverImageView.centerXAnchor
+        ).isActive = true
+        activityIndicatorView.centerYAnchor.constraint(
+            equalTo: coverImageView.centerYAnchor
+        ).isActive = true
         
-        descriptionLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: indent).isActive = true
-        descriptionLabel.topAnchor.constraint(equalTo: coverImageView.bottomAnchor, constant: indent).isActive = true
-        descriptionLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -indent).isActive = true
-        descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -indent).isActive = true
+        descriptionLabel.leftAnchor.constraint(
+            equalTo: contentView.leftAnchor, constant: indent
+        ).isActive = true
+        descriptionLabel.topAnchor.constraint(
+            equalTo: coverImageView.bottomAnchor,
+            constant: indent
+        ).isActive = true
+        descriptionLabel.rightAnchor.constraint(
+            equalTo: contentView.rightAnchor,
+            constant: -indent
+        ).isActive = true
+        descriptionLabel.bottomAnchor.constraint(
+            equalTo: contentView.bottomAnchor,
+            constant: -indent
+        ).isActive = true
     }
 }
 

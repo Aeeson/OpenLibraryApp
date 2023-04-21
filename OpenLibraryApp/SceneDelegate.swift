@@ -4,12 +4,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    func scene(
+        _ scene: UIScene,
+        willConnectTo session: UISceneSession,
+        options connectionOptions: UIScene.ConnectionOptions
+    ) {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         let navigationController = UINavigationController()
         let builder = AssemblyBuilder()
-        let coordinator = Coordinator(navigationController: navigationController, assemblyBuilder: builder)
+        let coordinator = Coordinator(
+            navigationController: navigationController,
+            assemblyBuilder: builder
+        )
         coordinator.openBooksList()
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
